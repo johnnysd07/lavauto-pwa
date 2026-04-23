@@ -10,12 +10,12 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
-  // Evitar interceptar llamadas a Google APIs y Google Drive
+  // Ignorar peticiones de Google Script y APIs para evitar bloqueos
   if (event.request.url.includes('googleapis.com')) return;
   if (event.request.url.includes('drive.google.com')) return;
   if (event.request.url.includes('script.google.com')) return;
 
   event.respondWith(
-    fetch(event.request).catch(() => new Response('Offline: Conéctate a internet para registrar datos.'))
+    fetch(event.request).catch(() => new Response('Offline: Conéctate para continuar.'))
   );
 });
